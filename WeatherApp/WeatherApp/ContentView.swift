@@ -8,9 +8,11 @@
 import SwiftUI
 
 struct ContentView: View {
+    @State private var isNight = false
+    
     var body: some View {
         ZStack {
-            Background(topColor: Color("darkBlue"), bottomColor: Color("lightBlue"))
+            Background(isNight: $isNight)
             
             VStack {
                 CityText(city: "Amsterdam")
@@ -30,7 +32,7 @@ struct ContentView: View {
                 Spacer()
                 
                 Button {
-                    print("Tapped")
+                    isNight = !isNight
                 } label: {
                     DButton(label: "Change time of day")
                 }
@@ -73,10 +75,13 @@ struct UpcomingForecast: View {
 }
 
 struct Background: View {
-    var topColor: Color
-    var bottomColor: Color
+    @Binding var isNight: Bool
+    
     var body: some View {
-        LinearGradient(colors: [topColor, bottomColor],
+        LinearGradient(colors: [
+            isNight ? .black : Color("darkBlue"),
+            isNight ? .gray : Color("lightBlue")
+        ],
                        startPoint: .topLeading,
                        endPoint: .bottomTrailing)
             .edgesIgnoringSafeArea(.all)
