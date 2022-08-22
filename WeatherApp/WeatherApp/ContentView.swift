@@ -16,35 +16,40 @@ struct ContentView: View {
         ZStack {
             Background(isNight: $isNight)
             
-            VStack {
-                CityText(city: weatherService.forecasts.location)
-                
-                TodayForecast(forecast: weatherService.forecasts.forecast[0])
-                
-                Spacer()
-                
-                HStack(spacing: 25) {
-                    ForEach (weatherService.forecasts.forecast.dropFirst(), id: \.id) { f in
-                        UpcomingForecast(day: "TST", forecast: f)
+            if let forecasts = weatherService.forecasts {
+                VStack {
+                    CityText(city: forecasts.location)
+                    
+                    TodayForecast(forecast: forecasts.forecast[0])
+                    
+                    Spacer()
+                    
+                    HStack(spacing: 25) {
+                        ForEach (forecasts.forecast.dropFirst(),
+                                 id: \.id) { f in
+                            UpcomingForecast(forecast: f)
+                        }
                     }
+                    
+                    Spacer()
+                    
+                    Button {
+                        isNight = !isNight
+                    } label: {
+                        DButton(label: "Change time of day")
+                    }
+                    
+                    Spacer()
                 }
-                
-                Spacer()
-                
-                Button {
-                    isNight = !isNight
-                } label: {
-                    DButton(label: "Change time of day")
-                }
-                
-                Spacer()
             }
+        }.onAppear {
+            weatherService.getForecasts(for: "Amsterdam", countryCode: "NL", forDays: 6)
         }
+        
     }
 }
 
 struct UpcomingForecast: View {
-    var day: String
     var forecast: Forecast
     
     var body: some View {
@@ -53,13 +58,13 @@ struct UpcomingForecast: View {
                 .font(.system(size: 18, weight: .medium))
                 .foregroundColor(.white)
             
-            Image(systemName: getIconName(forecast.condition))
+            Image(systemName: forecast.weatherImage)
                 .resizable()
                 .renderingMode(.original)
                 .aspectRatio(contentMode: .fit)
                 .frame(width: 40, height: 40)
             
-            Text("\(forecast.avgtemp_c)°")
+            Text(String(format: "%.1f°", forecast.avgtemp_c))
                 .font(.system(size: 18, weight: .medium))
                 .foregroundColor(.white)
             
@@ -96,120 +101,17 @@ struct TodayForecast: View {
     
     var body: some View {
         VStack {
-            Image(systemName: getIconName(forecast.condition))
+            Image(systemName: forecast.weatherImage)
                 .resizable()
                 .renderingMode(.original)
                 .aspectRatio(contentMode: .fit)
                 .frame(width: 180, height: 180)
                 .padding()
             
-            Text("\(forecast.avgtemp_c)°")
+            Text(String(format: "%.1f°", forecast.avgtemp_c))
                 .font(.system(size: 40, weight: .medium))
                 .foregroundColor(.white)
         }
-    }
-}
-
-func getIconName(_ condition: String) -> String {
-    switch(condition) {
-    case "Sunny":
-        return "sun.max.fill"
-    case "Clear":
-        return "moon.fill"
-    case "Partly cloudy":
-        return "cloud.sun.fill"
-    case "Cloudy":
-        return "cloud.fill"
-    case "Overcast":
-        return ""
-    case "Mist":
-        return "sun.haze.fill"
-    case "Patchy rain possible":
-        return "cloud.sun.rain.fill"
-    case "Patchy snow possible":
-        return ""
-    case "Patchy sleet possible":
-        return ""
-    case "Patchy freezing drizzle possible":
-        return ""
-    case "Thundery outbreaks possible":
-        return ""
-    case "Blowing snow":
-        return ""
-    case "Blizzard":
-        return ""
-    case "Fog":
-        return ""
-    case "Freezing fog":
-        return ""
-    case "Patchy light drizzle":
-        return ""
-    case "Light drizzle":
-        return ""
-    case "Freezing drizzle":
-        return ""
-    case "Heavy freezing drizzle":
-        return ""
-    case "Patchy light rain":
-        return ""
-    case "Light rain":
-        return ""
-    case "Moderate rain at times":
-        return "cloud.rain.fill"
-    case "Heavy rain at times":
-        return ""
-    case "Heavy rain":
-        return ""
-    case "Light freezing rain":
-        return ""
-    case "Moderate or heavy freezing rain":
-        return ""
-    case "Light sleet":
-        return ""
-    case "Moderate or heavy sleet":
-        return ""
-    case "Patchy light snow":
-        return ""
-    case "Light snow":
-        return ""
-    case "Patchy moderate snow":
-        return ""
-    case "Moderate snow":
-        return ""
-    case "Patchy heavy snow":
-        return ""
-    case "Heavy snow":
-        return ""
-    case "Ice pellets":
-        return ""
-    case "Light rain shower":
-        return ""
-    case "Moderate or heavy rain shower":
-        return ""
-    case "Torrential rain shower":
-        return ""
-    case "Light sleet showers":
-        return ""
-    case "Moderate or heavy sleet showers":
-        return ""
-    case "Light snow showers":
-        return ""
-    case "Moderate or heavy snow showers":
-        return ""
-    case "Light showers of ice pellets":
-        return ""
-    case "Moderate or heavy showers of ice pellets":
-        return ""
-    case "Patchy light rain with thunder":
-        return ""
-    case "Moderate or heavy rain with thunder":
-        return "cloud.bolt.rain.fill"
-    case "Patchy light snow with thunder":
-        return ""
-    case "Moderate or heavy snow with thunder":
-        return ""
-    default:
-        fatalError("No image yet for condition: \(condition)")
     }
 }
 

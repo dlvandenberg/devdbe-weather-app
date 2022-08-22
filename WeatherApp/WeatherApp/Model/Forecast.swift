@@ -15,6 +15,6 @@ struct Forecasts {
 struct Forecast {
     var id = UUID()
     var date: Date
-    var avgtemp_c: Int
-    var condition: String
+    var avgtemp_c: Float
+    var weatherImage: String
 }
