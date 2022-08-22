@@ -17,6 +17,8 @@
 		089C4CEE28B1FB6C00881D61 /* WeatherService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089C4CED28B1FB6C00881D61 /* WeatherService.swift */; };
 		089C4CF028B1FE7000881D61 /* WeatherModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089C4CEF28B1FE7000881D61 /* WeatherModel.swift */; };
 		089C4CF228B2043F00881D61 /* WeatherApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089C4CF128B2043F00881D61 /* WeatherApi.swift */; };
+		089C4CF428B390AB00881D61 /* weather-api.plist in Resources */ = {isa = PBXBuildFile; fileRef = 089C4CF328B390AB00881D61 /* weather-api.plist */; };
+		089C4CF628B391E400881D61 /* weather-api-example.plist in Resources */ = {isa = PBXBuildFile; fileRef = 089C4CF528B391E400881D61 /* weather-api-example.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -31,6 +33,8 @@
 		089C4CED28B1FB6C00881D61 /* WeatherService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherService.swift; sourceTree = "<group>"; };
 		089C4CEF28B1FE7000881D61 /* WeatherModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherModel.swift; sourceTree = "<group>"; };
 		089C4CF128B2043F00881D61 /* WeatherApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherApi.swift; sourceTree = "<group>"; };
+		089C4CF328B390AB00881D61 /* weather-api.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "weather-api.plist"; sourceTree = "<group>"; };
+		089C4CF528B391E400881D61 /* weather-api-example.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "weather-api-example.plist"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -47,6 +51,8 @@
 		089C4CC728B14B5B00881D61 = {
 			isa = PBXGroup;
 			children = (
+				089C4CF328B390AB00881D61 /* weather-api.plist */,
+				089C4CF528B391E400881D61 /* weather-api-example.plist */,
 				089C4CD228B14B5B00881D61 /* WeatherApp */,
 				089C4CD128B14B5B00881D61 /* Products */,
 			);
@@ -176,7 +182,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				089C4CDB28B14B5C00881D61 /* Preview Assets.xcassets in Resources */,
+				089C4CF428B390AB00881D61 /* weather-api.plist in Resources */,
 				089C4CD828B14B5C00881D61 /* Assets.xcassets in Resources */,
+				089C4CF628B391E400881D61 /* weather-api-example.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
