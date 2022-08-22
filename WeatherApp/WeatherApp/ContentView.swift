@@ -19,6 +19,7 @@ struct ContentView: View {
             if let forecasts = weatherService.forecasts {
                 VStack {
                     CityText(city: forecasts.location)
+                        .padding(.top, 15)
                     
                     TodayForecast(forecast: forecasts.forecast[0])
                     
