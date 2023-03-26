@@ -15,10 +15,9 @@
 		089C4CE628B1546700881D61 /* Forecast.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089C4CE528B1546700881D61 /* Forecast.swift */; };
 		089C4CE928B1FAAA00881D61 /* DateExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089C4CE828B1FAAA00881D61 /* DateExtensions.swift */; };
 		089C4CEE28B1FB6C00881D61 /* WeatherService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089C4CED28B1FB6C00881D61 /* WeatherService.swift */; };
-		089C4CF028B1FE7000881D61 /* WeatherModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089C4CEF28B1FE7000881D61 /* WeatherModel.swift */; };
-		089C4CF228B2043F00881D61 /* WeatherApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089C4CF128B2043F00881D61 /* WeatherApi.swift */; };
 		089C4CF428B390AB00881D61 /* weather-api.plist in Resources */ = {isa = PBXBuildFile; fileRef = 089C4CF328B390AB00881D61 /* weather-api.plist */; };
 		089C4CF628B391E400881D61 /* weather-api-example.plist in Resources */ = {isa = PBXBuildFile; fileRef = 089C4CF528B391E400881D61 /* weather-api-example.plist */; };
+		08E4329829CF76C6006467B1 /* devdbe-weather-sdk in Frameworks */ = {isa = PBXBuildFile; productRef = 08E4329729CF76C6006467B1 /* devdbe-weather-sdk */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -31,8 +30,6 @@
 		089C4CE528B1546700881D61 /* Forecast.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Forecast.swift; sourceTree = "<group>"; };
 		089C4CE828B1FAAA00881D61 /* DateExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateExtensions.swift; sourceTree = "<group>"; };
 		089C4CED28B1FB6C00881D61 /* WeatherService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherService.swift; sourceTree = "<group>"; };
-		089C4CEF28B1FE7000881D61 /* WeatherModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherModel.swift; sourceTree = "<group>"; };
-		089C4CF128B2043F00881D61 /* WeatherApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherApi.swift; sourceTree = "<group>"; };
 		089C4CF328B390AB00881D61 /* weather-api.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "weather-api.plist"; sourceTree = "<group>"; };
 		089C4CF528B391E400881D61 /* weather-api-example.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "weather-api-example.plist"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -42,15 +39,24 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				08E4329829CF76C6006467B1 /* devdbe-weather-sdk in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		083A929429CF15D600337655 /* Packages */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Packages;
+			sourceTree = "<group>";
+		};
 		089C4CC728B14B5B00881D61 = {
 			isa = PBXGroup;
 			children = (
+				083A929429CF15D600337655 /* Packages */,
 				089C4CF328B390AB00881D61 /* weather-api.plist */,
 				089C4CF528B391E400881D61 /* weather-api-example.plist */,
 				089C4CD228B14B5B00881D61 /* WeatherApp */,
@@ -117,8 +123,6 @@
 			isa = PBXGroup;
 			children = (
 				089C4CED28B1FB6C00881D61 /* WeatherService.swift */,
-				089C4CEF28B1FE7000881D61 /* WeatherModel.swift */,
-				089C4CF128B2043F00881D61 /* WeatherApi.swift */,
 			);
 			path = Api;
 			sourceTree = "<group>";
@@ -139,6 +143,9 @@
 			dependencies = (
 			);
 			name = WeatherApp;
+			packageProductDependencies = (
+				08E4329729CF76C6006467B1 /* devdbe-weather-sdk */,
+			);
 			productName = WeatherApp;
 			productReference = 089C4CD028B14B5B00881D61 /* WeatherApp.app */;
 			productType = "com.apple.product-type.application";
@@ -167,6 +174,9 @@
 				Base,
 			);
 			mainGroup = 089C4CC728B14B5B00881D61;
+			packageReferences = (
+				08E4329629CF76C6006467B1 /* XCRemoteSwiftPackageReference "devdbe-weather-sdk" */,
+			);
 			productRefGroup = 089C4CD128B14B5B00881D61 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -198,9 +208,7 @@
 				089C4CE628B1546700881D61 /* Forecast.swift in Sources */,
 				089C4CE928B1FAAA00881D61 /* DateExtensions.swift in Sources */,
 				089C4CD628B14B5B00881D61 /* ContentView.swift in Sources */,
-				089C4CF028B1FE7000881D61 /* WeatherModel.swift in Sources */,
 				089C4CE328B1527800881D61 /* DButton.swift in Sources */,
-				089C4CF228B2043F00881D61 /* WeatherApi.swift in Sources */,
 				089C4CEE28B1FB6C00881D61 /* WeatherService.swift in Sources */,
 				089C4CD428B14B5B00881D61 /* WeatherAppApp.swift in Sources */,
 			);
@@ -405,6 +413,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		08E4329629CF76C6006467B1 /* XCRemoteSwiftPackageReference "devdbe-weather-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/dlvandenberg/devdbe-weather-sdk.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		08E4329729CF76C6006467B1 /* devdbe-weather-sdk */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 08E4329629CF76C6006467B1 /* XCRemoteSwiftPackageReference "devdbe-weather-sdk" */;
+			productName = "devdbe-weather-sdk";
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 089C4CC828B14B5B00881D61 /* Project object */;
 }

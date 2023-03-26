@@ -6,13 +6,28 @@
 //
 
 import Foundation
+import devdbe_weather_sdk
 
 @MainActor
 class WeatherService: ObservableObject {
     @Published var forecasts: Forecasts?
     
-    private var weatherApi = WeatherApiImpl()
     private var task: Task<Void, Never>?
+    private static var apiKey: String {
+        get {
+            guard let filePath = Bundle.main.path(forResource: "weather-api", ofType: "plist") else {
+                fatalError("Could not find file: weather-api.plist")
+            }
+
+            let plist = NSDictionary(contentsOfFile: filePath)
+            guard let value = plist?.object(forKey: "API_KEY") as? String else {
+                fatalError("Could not find key 'API_KEY' in 'weather-api.plist'")
+            }
+
+            return value
+        }
+    }
+    private var weatherApi = WeatherApiImpl(apiKey: apiKey)
     
     private func map(data: RForecastDay?) -> Forecasts? {
         guard let forecastDay = data else { return nil }
@@ -20,7 +35,7 @@ class WeatherService: ObservableObject {
         let formatter = DateFormatter()
         formatter.dateFormat = "YYYY-mm-DD"
         
-        let mappedForecastList = forecastDay.data.map { forecast -> Forecast in
+        let mappedForecastList = forecastDay.data.map { (forecast) in
             guard let date = formatter.date(from: forecast.datetime ?? "") else { fatalError("Not a date") }
             let temp = forecast.temp ?? 0
             let condition = forecast.weather?.code ?? 0
@@ -87,6 +102,7 @@ class WeatherService: ObservableObject {
                 return
             }
             
+            print("APP: Using SDK to fetch daily forecast")
             let forecasts = await weatherApi.dailyForecast(city: city, countryCode: countryCode, days: days)
             let mappedForecasts = map(data: forecasts)
             self.forecasts = mappedForecasts
